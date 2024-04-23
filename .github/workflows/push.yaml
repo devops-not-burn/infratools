@@ -14,7 +14,11 @@ jobs:
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build Docker image
-        run: docker build -t mrgreyves/infratools:${GITHUB_REF} .
+        run: |
+          export infraimagetag=$(echo ${GITHUB_REF} | sed 's|refs/tags/||')
+          docker build -t mrgreyves/infratools:${infraimagetag} .
 
       - name: Push Docker image
-        run: docker push mrgreyves/infratools:${GITHUB_REF}
+        run: |
+          export infraimagetag=$(echo ${GITHUB_REF} | sed 's|refs/tags/||')
+          docker push mrgreyves/infratools:${GITHUB_REF}
