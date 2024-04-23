@@ -11,7 +11,7 @@ jobs:
       - name: Lint Dockerfile
         uses: hadolint/hadolint-action@v3.1.0
         with:
-          files: Dockerfile
+          files: ./Dockerfile
 
   security-scan:
     runs-on: ubuntu-22.04
