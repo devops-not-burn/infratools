@@ -2,6 +2,7 @@ FROM alpine:3.19.1
 
 ARG grpcurl_version=1.9.1
 
+# hadolint ignore=DL3018
 RUN apk --update --no-cache add bash curl gum jq yq netcat-openbsd
 
 ### grpcurl installation
