@@ -21,4 +21,4 @@ jobs:
       - name: Push Docker image
         run: |
           export infraimagetag=$(echo ${GITHUB_REF} | sed 's|refs/tags/||')
-          docker push mrgreyves/infratools:${GITHUB_REF}
+          docker push mrgreyves/infratools:${infraimagetag}
