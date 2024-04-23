@@ -1,4 +1,4 @@
-name: Push infratools image
+name: Infratools image - publish stage  
 on:
   release:
     types: [published]
