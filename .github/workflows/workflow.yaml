@@ -1,4 +1,4 @@
-name: Build simple flask app image
+name: Infra tools image
 on: push
 
 jobs:
@@ -9,6 +9,6 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Lint Dockerfile
-        uses: hadolint/hadolint@v3.1.0
+        uses: hadolint/hadolint-action@v3.1.0
         with:
           files: Dockerfile
