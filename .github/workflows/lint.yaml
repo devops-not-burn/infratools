@@ -1,9 +1,9 @@
-name: Infra tools image
+name: Infratools image - lint stage
 on: push
 
 jobs:
   lint-dockerfile:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -12,3 +12,23 @@ jobs:
         uses: hadolint/hadolint-action@v3.1.0
         with:
           files: Dockerfile
+
+  security-scan:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Build an image from Dockerfile
+        run: |
+          docker build -t mrgreyves/infratools:${{ github.sha }} .
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'docker build -t mrgreyves/infratools:${{ github.sha }}'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH'
