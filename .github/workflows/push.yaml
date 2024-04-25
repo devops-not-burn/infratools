@@ -28,5 +28,6 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
+          platforms: linux/amd64,linux/arm64
           push: true
-          tags: mrgreyves/infratools:${{ steps.get_version.outputs.VERSION }}
+          tags: mrgreyves/infratools:${{ steps.get_version.outputs.VERSION }}, mrgreyves/infratools:latest
