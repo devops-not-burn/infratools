@@ -16,3 +16,23 @@ Docker-образ с базово необходимым инфраструкт�
 * netcat-openbsd
 
 Образ доступен по имени ```mrgreyves/infratools:${RELEASE-TAG}```, а актуальный тег вы можете посмотреть в релизах ^_^  
+
+Как запустить в k8s:  
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: infratools
+spec:
+  containers:
+  - name: infratools
+    image: mrgreyves/infratools:latest
+    command: ["sleep", "infinity"]
+    resources:
+      requests:
+        memory: "64Mi"
+        cpu: "250m"
+      limits:
+        memory: "128Mi"
+        cpu: "250m"
+```
